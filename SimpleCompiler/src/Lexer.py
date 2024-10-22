@@ -17,7 +17,8 @@ class Lexer:
             ('DELIM', r'[ \n\t\r]+'),                                   # Blank Spaces
         ]
         # Compile regex for tokenization
-        self.token_regebbbx = self._compile_regex()
+
+        self.token_regex = self._compile_regex()
 
     def _compile_regex(self):
         """
