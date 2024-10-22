@@ -7,7 +7,7 @@ class TestLexer(unittest.TestCase):
     def test_get_size(self):
         # Arrange
         code = '''
-        int x = 10;
+        float x = 10;
         float y = 3.14;
         if (x >= y) {
             during;
