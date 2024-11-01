@@ -38,19 +38,3 @@ class Lexer:
                 continue  # Ignore delimiters like spaces, tabs, and newlines
             tokens.append((token_type, token_value))
         return tokens
-
-    def print_tokens(self, code):
-        """
-        Print the tokens identified in the input code.
-        """
-        for match in re.finditer(self.token_regex, code):
-            token_type = match.lastgroup
-            token_value = match.group(token_type)
-            if token_type == 'ID':
-                print(f'Token({token_type}, {token_value})')
-            elif token_type == 'NUM':
-                print(f'Token({token_type}, {token_value})')
-            elif token_type == 'DELIM':
-                continue
-            else:
-                print(f'Token({token_type}, {token_value})')

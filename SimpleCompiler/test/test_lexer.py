@@ -1,10 +1,10 @@
-import Lexer
+from Lexer import Lexer
 import unittest
 
 
 class TestLexer(unittest.TestCase):
 
-    def test_get_size(self):
+    def test_tokenize(self):
         # Arrange
         code = '''
         float x = 10;
@@ -13,7 +13,9 @@ class TestLexer(unittest.TestCase):
             during;
         }
         '''
+        l = Lexer()
         # Act
-        Lexer.lexer(code)
+        tokens = l.tokenize(code)
+        print(tokens)
         # Assert
         self.assertTrue(True)
