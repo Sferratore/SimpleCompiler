@@ -1,0 +1,9 @@
+GRAMMATICHE COMPILATORE:
+
+declaration -> int | float, assignmnt
+
+assignmnt -> ID, ASSIGN, expression
+
+expression ->  num | ID, ( mathop, num | ID )*
+
+conditionalexec -> incase, (, expression, ), {,  ( declaration | assignmnt | expression | conditionalexec )*, }

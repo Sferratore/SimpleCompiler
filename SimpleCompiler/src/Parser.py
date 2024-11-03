@@ -33,6 +33,8 @@ class Parser:
         token = self._current_token()
         if token[0] == 'KEYWORD' and token[1] in ('int', 'float'):
             return self.parse_declaration()
+        elif token[0] == 'ID' and token[1] == 'ASSIGN':
+            return self.parse_expression()
         else:
             raise SyntaxError(f"Unexpected token: {token}")
 
