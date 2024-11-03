@@ -27,14 +27,17 @@ class Lexer:
         return '|'.join(f'(?P<{name}>{pattern})' for name, pattern in self.token_specification)
 
     def tokenize(self, code):
-        """
-        Tokenize the given source code and return a list of tokens.
-        """
         tokens = []
-        for match in re.finditer(self.token_regex, code):
-            token_type = match.lastgroup
-            token_value = match.group(token_type)
-            if token_type == 'DELIM':
-                continue  # Ignore delimiters like spaces, tabs, and newlines
-            tokens.append((token_type, token_value))
+        pos = 0
+        while pos < len(code):
+            match = re.match(self.token_regex, code[pos:])
+            if match:
+                token_type = match.lastgroup
+                token_value = match.group(token_type)
+                if token_type != 'DELIM':  # Ignore delimiters like spaces, tabs, and newlines
+                    tokens.append((token_type, token_value))
+                pos += len(token_value)  # Move forward by the length of the matched token
+            else:
+                # Raise an error if no valid token is found at this position
+                raise ValueError(f"Unknown token sequence at position {pos}: {code[pos:pos+10]}")
         return tokens

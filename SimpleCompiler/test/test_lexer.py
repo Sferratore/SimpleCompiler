@@ -19,3 +19,23 @@ class TestLexer(unittest.TestCase):
         print(tokens)
         # Assert
         self.assertEqual(tokens.__str__(), "[('KEYWORD', 'float'), ('ID', 'x'), ('ASSIGN', '='), ('NUM', '10'), ('SEMI', ';'), ('KEYWORD', 'float'), ('ID', 'y'), ('ASSIGN', '='), ('NUM', '3.14'), ('SEMI', ';'), ('KEYWORD', 'incase'), ('LPAR', '('), ('ID', 'x'), ('RELOP', '>='), ('ID', 'y'), ('RPAR', ')'), ('LBRA', '{'), ('KEYWORD', 'during'), ('LPAR', '('), ('NUM', '3'), ('RELOP', '>'), ('NUM', '2'), ('RPAR', ')'), ('LBRA', '{'), ('RBRA', '}'), ('RBRA', '}')]")
+
+    def test_tokenize_bad_code(self):
+        # Arrange
+        code = '''
+        float x = 10; !!
+        float y = 3.14;
+        incase (x >= y) {
+            during(3 > 2){}
+        }
+        '''
+        l = Lexer()
+        isExceptionRaised = False
+        # Act
+        try:
+            tokens = l.tokenize(code)
+        except ValueError as e:
+            print(e.__str__())
+            isExceptionRaised = True
+        # Assert
+        self.assertTrue(isExceptionRaised)
